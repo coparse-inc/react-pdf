@@ -17,6 +17,14 @@
       "plugins": [
         ["@babel/transform-runtime", { "useESModules": true }]
       ]
+    },
+    "test": {
+      "presets": [
+        ["@babel/env", {
+          "targets": { "node": "current" }
+        }],
+        "@babel/react"
+      ],
     }
   }
 }

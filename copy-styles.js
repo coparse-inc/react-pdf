@@ -1,6 +1,6 @@
-const fs = require('fs');
+import { copyFile } from 'fs';
 
-fs.copyFile('src/Page/AnnotationLayer.css', 'dist/esm/Page/AnnotationLayer.css', (error) => {
+copyFile('src/Page/AnnotationLayer.css', 'dist/esm/Page/AnnotationLayer.css', (error) => {
   if (error) {
     throw error;
   }
@@ -8,7 +8,7 @@ fs.copyFile('src/Page/AnnotationLayer.css', 'dist/esm/Page/AnnotationLayer.css',
   console.log('AnnotationLayer.css copied successfully to ESM build.');
 });
 
-fs.copyFile('src/Page/AnnotationLayer.css', 'dist/umd/Page/AnnotationLayer.css', (error) => {
+copyFile('src/Page/AnnotationLayer.css', 'dist/umd/Page/AnnotationLayer.css', (error) => {
   if (error) {
     throw error;
   }

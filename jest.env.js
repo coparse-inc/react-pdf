@@ -4,7 +4,7 @@
  * Workaround for https://github.com/facebook/jest/issues/7780
  */
 
-const JSDOMEnvironment = require('jest-environment-jsdom');
+import JSDOMEnvironment from 'jest-environment-jsdom';
 
 class CustomJSDOMEnvironment extends JSDOMEnvironment {
   constructor(config) {
@@ -22,4 +22,4 @@ class CustomJSDOMEnvironment extends JSDOMEnvironment {
   }
 }
 
-module.exports = CustomJSDOMEnvironment;
+export default CustomJSDOMEnvironment;

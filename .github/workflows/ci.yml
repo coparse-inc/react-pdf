@@ -79,3 +79,4 @@ jobs:
           git add *
           git commit -am "$msg"
           git tag -a "$ver" -m "$msg"
+          git push --tags origin dist
