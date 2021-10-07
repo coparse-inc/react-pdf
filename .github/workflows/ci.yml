@@ -5,30 +5,14 @@ name: CI
 
 on:
   push:
-    branches: [ '*' ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
-  lint:
-    name: Static code analysis
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Use Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-
-      - name: Install dependencies
-        run: yarn --immutable
-
-      - name: Run tests
-        run: yarn lint
-
   unit:
     name: Unit tests
     runs-on: ubuntu-latest
@@ -42,8 +26,56 @@ jobs:
         with:
           node-version: '16'
 
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
       - name: Install dependencies
         run: yarn --immutable
 
       - name: Run tests
         run: yarn jest
+  dist:
+    name: Build dist
+    runs-on: ubuntu-latest
+    needs: unit
+
+    steps:
+      - name: Configure Git
+        run: |
+          git config --global core.autocrlf false
+          git config --global user.name "CoParse GitHub Bot"
+          git config --global user.email "github-bot@coworker.com"
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn --immutable
+
+      - name: Build dist
+        run: |
+          rm -rf dist
+          mkdir dist
+          git clone --depth 2 --single-branch --branch=dist https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/coparse-inc/react-pdf dist
+          yarn build
+          git remote set-url origin https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/coparse-inc/react-pdf
+          cd dist
+          ver="v$(date +%Y%m.%d.%H%M%S)"
+          msg="Build $ver"
+          git add *
+          git commit -am "$msg"
+          git tag -a "$ver" -m "$msg"
