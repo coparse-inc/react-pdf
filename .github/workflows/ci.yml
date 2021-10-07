@@ -72,6 +72,7 @@ jobs:
           mkdir dist
           git clone --depth 2 --single-branch --branch=dist https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/coparse-inc/react-pdf dist
           yarn build
+          cp package.json dist/
           git remote set-url origin https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/coparse-inc/react-pdf
           cd dist
           ver="v$(date +%Y%m.%d.%H%M%S)"
