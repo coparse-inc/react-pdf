@@ -15,6 +15,8 @@
 
 /* eslint-disable class-methods-use-this, no-empty-function */
 
+import {addLinkAttributes, LinkTarget } from 'pdfjs-dist/build/pdf';
+
 export default class LinkService {
   constructor() {
     this.externalLinkTarget = null;
@@ -46,6 +48,15 @@ export default class LinkService {
 
   get rotation() {
     return 0;
+  }
+
+  addLinkAttributes(link, url, newWindow = false) {
+    addLinkAttributes(link, {
+      url,
+      target: newWindow ? LinkTarget.BLANK : this.externalLinkTarget,
+      rel: this.externalLinkRel,
+      enabled: this.externalLinkEnabled,
+    });
   }
 
   set rotation(value) {}
