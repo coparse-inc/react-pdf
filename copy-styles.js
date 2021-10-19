@@ -1,4 +1,6 @@
-import { copyFile } from 'fs';
+import { copyFile, mkdirSync } from 'fs';
+
+mkdirSync('dist/esm/Page', {recursive: true});
 
 copyFile('src/Page/AnnotationLayer.css', 'dist/esm/Page/AnnotationLayer.css', (error) => {
   if (error) {
