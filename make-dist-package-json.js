@@ -9,5 +9,7 @@ delete pkg['scripts'];
 delete pkg['source'];
 delete pkg['devDependencies'];
 delete pkg['type'];
+pkg['main'] = pkg['main'].replace(/^dist[/]/, '');
+pkg['module'] = pkg['module'].replace(/^dist[/]/, '');
 
 writeFileSync(join(__dirname, 'dist', 'package.json'), JSON.stringify(pkg, null, 2));
