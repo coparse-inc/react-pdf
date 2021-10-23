@@ -72,6 +72,10 @@ jobs:
           mkdir dist
           git clone --depth 2 --single-branch --branch=dist https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/coparse-inc/react-pdf dist
           yarn build
+          mkdir -p dist/esm/Page
+          cp src/Page/AnnotationLayer.css dist/esm/Page/AnnotationLayer.css
+          cp src/Page/AnnotationLayer.css dist/umd/Page/AnnotationLayer.css
+          cp -rf types dist/
           node make-dist-package-json.js
           git remote set-url origin https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/coparse-inc/react-pdf
           cd dist

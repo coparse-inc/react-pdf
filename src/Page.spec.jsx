@@ -498,13 +498,11 @@ describe('Page', () => {
         />,
       );
 
-      expect.assertions(2);
+      expect.assertions(1);
       return onLoadSuccessPromise.then(() => {
         component.update();
         const pageCanvas = component.find('PageCanvas');
-        const pageSVG = component.find('PageSVG');
         expect(pageCanvas).toHaveLength(0);
-        expect(pageSVG).toHaveLength(0);
       });
     });
 
@@ -528,28 +526,6 @@ describe('Page', () => {
 
       const pageCanvas = component.find('PageCanvas');
       expect(pageCanvas).toHaveLength(1);
-    });
-
-    it('requests page to be rendered in SVG mode when given renderMode = "svg"', async () => {
-      const { func: onLoadSuccess, promise: onLoadSuccessPromise } = makeAsyncCallback();
-
-      const component = shallow(
-        <Page
-          onLoadSuccess={onLoadSuccess}
-          pageIndex={0}
-          pdf={pdf}
-          renderMode="svg"
-        />,
-      );
-
-      expect.assertions(1);
-
-      await onLoadSuccessPromise;
-
-      component.update();
-
-      const pageSVG = component.find('PageSVG');
-      expect(pageSVG).toHaveLength(1);
     });
 
     it('requests text content to be rendered by default', async () => {
@@ -636,28 +612,6 @@ describe('Page', () => {
 
       component.update();
 
-      const textLayer = component.find('TextLayer');
-      expect(textLayer).toHaveLength(1);
-    });
-
-    it('renders TextLayer when given renderMode = "svg"', async () => {
-      const { func: onLoadSuccess, promise: onLoadSuccessPromise } = makeAsyncCallback();
-
-      const component = shallow(
-        <Page
-          onLoadSuccess={onLoadSuccess}
-          pageIndex={0}
-          pdf={pdf}
-          renderMode="svg"
-          renderTextLayer
-        />,
-      );
-
-      expect.assertions(1);
-
-      await onLoadSuccessPromise;
-
-      component.update();
       const textLayer = component.find('TextLayer');
       expect(textLayer).toHaveLength(1);
     });
