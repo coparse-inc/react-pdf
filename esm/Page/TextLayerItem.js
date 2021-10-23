@@ -13,9 +13,7 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import PageContext from '../PageContext';
-import { isPage, isRotate } from '../shared/propTypes';
 export var TextLayerItemInternal = /*#__PURE__*/function (_PureComponent) {
   _inherits(TextLayerItemInternal, _PureComponent);
 
@@ -210,18 +208,6 @@ export var TextLayerItemInternal = /*#__PURE__*/function (_PureComponent) {
 
   return TextLayerItemInternal;
 }(PureComponent);
-TextLayerItemInternal.propTypes = {
-  customTextRenderer: PropTypes.func,
-  fontName: PropTypes.string.isRequired,
-  itemIndex: PropTypes.number.isRequired,
-  // eslint-disable-line react/no-unused-prop-types
-  page: isPage.isRequired,
-  rotate: isRotate,
-  scale: PropTypes.number,
-  str: PropTypes.string.isRequired,
-  transform: PropTypes.arrayOf(PropTypes.number).isRequired,
-  width: PropTypes.number.isRequired
-};
 export default function TextLayerItem(props) {
   return /*#__PURE__*/React.createElement(PageContext.Consumer, null, function (context) {
     return /*#__PURE__*/React.createElement(TextLayerItemInternal, _extends({}, context, props));

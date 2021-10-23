@@ -31,8 +31,6 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _DocumentContext = _interopRequireDefault(require("./DocumentContext"));
 
 var _OutlineContext = _interopRequireDefault(require("./OutlineContext"));
@@ -40,8 +38,6 @@ var _OutlineContext = _interopRequireDefault(require("./OutlineContext"));
 var _Ref = _interopRequireDefault(require("./Ref"));
 
 var _utils = require("./shared/utils");
-
-var _propTypes2 = require("./shared/propTypes");
 
 var _excluded = ["item"];
 
@@ -182,21 +178,6 @@ var OutlineItemInternal = /*#__PURE__*/function (_PureComponent) {
 }(_react.PureComponent);
 
 exports.OutlineItemInternal = OutlineItemInternal;
-
-var isDestination = _propTypes["default"].oneOfType([_propTypes["default"].string, _propTypes["default"].arrayOf(_propTypes["default"].any)]);
-
-OutlineItemInternal.propTypes = {
-  item: _propTypes["default"].shape({
-    dest: isDestination,
-    items: _propTypes["default"].arrayOf(_propTypes["default"].shape({
-      dest: isDestination,
-      title: _propTypes["default"].string
-    })),
-    title: _propTypes["default"].string
-  }).isRequired,
-  onClick: _propTypes["default"].func,
-  pdf: _propTypes2.isPdf.isRequired
-};
 
 var OutlineItem = function OutlineItem(props) {
   return /*#__PURE__*/_react["default"].createElement(_DocumentContext["default"].Consumer, null, function (documentContext) {

@@ -22,17 +22,15 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
  * Loads a PDF document. Passes it to all children.
  */
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import makeEventProps from 'make-event-props';
 import makeCancellable from 'make-cancellable-promise';
 import mergeClassNames from 'merge-class-names';
-import * as pdfjs from 'pdfjs-dist/build/pdf';
+import * as pdfjs from 'pdfjs-dist';
 import DocumentContext from './DocumentContext';
 import Message from './Message';
 import LinkService from './LinkService';
 import PasswordResponses from './PasswordResponses';
 import { cancelRunningTask, dataURItoByteString, displayCORSWarning, errorOnDev, isArrayBuffer, isBlob, isBrowser, isDataURI, isFile, loadFromFile, warnOnDev } from './shared/utils';
-import { eventProps, isClassName, isFile as isFileProp, isRef } from './shared/propTypes';
 var PDFDataRangeTransport = pdfjs.PDFDataRangeTransport;
 
 var Document = /*#__PURE__*/function (_PureComponent) {
@@ -428,22 +426,3 @@ Document.defaultProps = {
     }
   }
 };
-var isFunctionOrNode = PropTypes.oneOfType([PropTypes.func, PropTypes.node]);
-Document.propTypes = _objectSpread(_objectSpread({}, eventProps), {}, {
-  children: PropTypes.node,
-  className: isClassName,
-  error: isFunctionOrNode,
-  file: isFileProp,
-  imageResourcesPath: PropTypes.string,
-  inputRef: isRef,
-  loading: isFunctionOrNode,
-  noData: isFunctionOrNode,
-  onItemClick: PropTypes.func,
-  onLoadError: PropTypes.func,
-  onLoadProgress: PropTypes.func,
-  onLoadSuccess: PropTypes.func,
-  onPassword: PropTypes.func,
-  onSourceError: PropTypes.func,
-  onSourceSuccess: PropTypes.func,
-  rotate: PropTypes.number
-});

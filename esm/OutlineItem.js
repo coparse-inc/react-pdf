@@ -15,12 +15,10 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import DocumentContext from './DocumentContext';
 import OutlineContext from './OutlineContext';
 import Ref from './Ref';
 import { isDefined } from './shared/utils';
-import { isPdf } from './shared/propTypes';
 export var OutlineItemInternal = /*#__PURE__*/function (_PureComponent) {
   _inherits(OutlineItemInternal, _PureComponent);
 
@@ -154,19 +152,6 @@ export var OutlineItemInternal = /*#__PURE__*/function (_PureComponent) {
 
   return OutlineItemInternal;
 }(PureComponent);
-var isDestination = PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.any)]);
-OutlineItemInternal.propTypes = {
-  item: PropTypes.shape({
-    dest: isDestination,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      dest: isDestination,
-      title: PropTypes.string
-    })),
-    title: PropTypes.string
-  }).isRequired,
-  onClick: PropTypes.func,
-  pdf: isPdf.isRequired
-};
 
 var OutlineItem = function OutlineItem(props) {
   return /*#__PURE__*/React.createElement(DocumentContext.Consumer, null, function (documentContext) {

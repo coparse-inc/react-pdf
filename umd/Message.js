@@ -9,8 +9,6 @@ exports["default"] = Message;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 function Message(_ref) {
   var children = _ref.children,
       type = _ref.type;
@@ -18,8 +16,3 @@ function Message(_ref) {
     className: "react-pdf__message react-pdf__message--".concat(type)
   }, children);
 }
-
-Message.propTypes = {
-  children: _propTypes["default"].node,
-  type: _propTypes["default"].oneOf(['error', 'loading', 'no-data']).isRequired
-};

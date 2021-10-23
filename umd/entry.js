@@ -27,7 +27,7 @@ Object.defineProperty(exports, "Page", {
 });
 exports.pdfjs = void 0;
 
-var pdfjs = _interopRequireWildcard(require("pdfjs-dist/build/pdf"));
+var pdfjs = _interopRequireWildcard(require("pdfjs-dist"));
 
 exports.pdfjs = pdfjs;
 

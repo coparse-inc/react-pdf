@@ -1,10 +1,10 @@
 // dist/esm/entry.js
-import * as pdfjs4 from "pdfjs-dist/build/pdf";
+import * as pdfjs3 from "pdfjs-dist";
 
 // dist/esm/Document.js
 import _extends from "@babel/runtime/helpers/esm/extends";
 import _objectWithoutProperties from "@babel/runtime/helpers/esm/objectWithoutProperties";
-import _typeof2 from "@babel/runtime/helpers/esm/typeof";
+import _typeof from "@babel/runtime/helpers/esm/typeof";
 import _classCallCheck2 from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass2 from "@babel/runtime/helpers/esm/createClass";
 import _assertThisInitialized from "@babel/runtime/helpers/esm/assertThisInitialized";
@@ -13,14 +13,13 @@ import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConst
 import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 import React2, { PureComponent } from "react";
-import PropTypes3 from "prop-types";
 import makeEventProps from "make-event-props";
 import makeCancellable from "make-cancellable-promise";
 import mergeClassNames from "merge-class-names";
 import {
   PDFDataRangeTransport,
   getDocument
-} from "pdfjs-dist/build/pdf";
+} from "pdfjs-dist";
 
 // dist/esm/DocumentContext.js
 import { createContext } from "react";
@@ -28,22 +27,17 @@ var DocumentContext_default = /* @__PURE__ */ createContext(null);
 
 // dist/esm/Message.js
 import React from "react";
-import PropTypes from "prop-types";
 function Message(_ref) {
   var children = _ref.children, type = _ref.type;
   return /* @__PURE__ */ React.createElement("div", {
     className: "react-pdf__message react-pdf__message--".concat(type)
   }, children);
 }
-Message.propTypes = {
-  children: PropTypes.node,
-  type: PropTypes.oneOf(["error", "loading", "no-data"]).isRequired
-};
 
 // dist/esm/LinkService.js
 import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass from "@babel/runtime/helpers/esm/createClass";
-import { addLinkAttributes as _addLinkAttributes, LinkTarget } from "pdfjs-dist/build/pdf";
+import { addLinkAttributes as _addLinkAttributes, LinkTarget } from "pdfjs-dist";
 var LinkService = /* @__PURE__ */ function() {
   function LinkService2() {
     _classCallCheck(this, LinkService2);
@@ -316,101 +310,6 @@ function loadFromFile(file) {
   });
 }
 
-// dist/esm/shared/propTypes.js
-import _typeof from "@babel/runtime/helpers/esm/typeof";
-import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
-import PropTypes2 from "prop-types";
-import { mouseEvents, touchEvents, keyboardEvents } from "make-event-props";
-var eventProps = function() {
-  var result = {};
-  [].concat(_toConsumableArray(mouseEvents), _toConsumableArray(touchEvents), _toConsumableArray(keyboardEvents)).forEach(function(eventName) {
-    result[eventName] = PropTypes2.func;
-  });
-  return result;
-}();
-var fileTypes = [PropTypes2.string, PropTypes2.instanceOf(ArrayBuffer), PropTypes2.shape({
-  data: PropTypes2.oneOfType([PropTypes2.object, PropTypes2.string]),
-  httpHeaders: PropTypes2.object,
-  range: PropTypes2.object,
-  url: PropTypes2.string,
-  withCredentials: PropTypes2.bool
-})];
-if (typeof File !== "undefined") {
-  fileTypes.push(PropTypes2.instanceOf(File));
-}
-if (typeof Blob !== "undefined") {
-  fileTypes.push(PropTypes2.instanceOf(Blob));
-}
-var isClassName = PropTypes2.oneOfType([PropTypes2.string, PropTypes2.arrayOf(PropTypes2.string)]);
-var isFile2 = PropTypes2.oneOfType(fileTypes);
-var isLinkService = PropTypes2.instanceOf(LinkService);
-var isLinkTarget = PropTypes2.oneOf(["_self", "_blank", "_parent", "_top"]);
-var isPage = PropTypes2.shape({
-  _transport: PropTypes2.shape({
-    fontLoader: PropTypes2.object.isRequired
-  }).isRequired,
-  commonObjs: PropTypes2.shape({
-    _objs: PropTypes2.object.isRequired
-  }).isRequired,
-  getAnnotations: PropTypes2.func.isRequired,
-  getTextContent: PropTypes2.func.isRequired,
-  getViewport: PropTypes2.func.isRequired,
-  render: PropTypes2.func.isRequired
-});
-var isPageIndex = function isPageIndex2(props, propName, componentName) {
-  var pageIndex = props[propName], pageNumber = props.pageNumber, pdf = props.pdf;
-  if (!isDefined(pdf)) {
-    return null;
-  }
-  if (isDefined(pageIndex)) {
-    if (typeof pageIndex !== "number") {
-      return new Error("`".concat(propName, "` of type `").concat(_typeof(pageIndex), "` supplied to `").concat(componentName, "`, expected `number`."));
-    }
-    if (pageIndex < 0) {
-      return new Error("Expected `".concat(propName, "` to be greater or equal to 0."));
-    }
-    var numPages = pdf.numPages;
-    if (pageIndex + 1 > numPages) {
-      return new Error("Expected `".concat(propName, "` to be less or equal to ").concat(numPages - 1, "."));
-    }
-  } else if (!isDefined(pageNumber)) {
-    return new Error("`".concat(propName, "` not supplied. Either pageIndex or pageNumber must be supplied to `").concat(componentName, "`."));
-  }
-  return null;
-};
-var isPageNumber = function isPageNumber2(props, propName, componentName) {
-  var pageNumber = props[propName], pageIndex = props.pageIndex, pdf = props.pdf;
-  if (!isDefined(pdf)) {
-    return null;
-  }
-  if (isDefined(pageNumber)) {
-    if (typeof pageNumber !== "number") {
-      return new Error("`".concat(propName, "` of type `").concat(_typeof(pageNumber), "` supplied to `").concat(componentName, "`, expected `number`."));
-    }
-    if (pageNumber < 1) {
-      return new Error("Expected `".concat(propName, "` to be greater or equal to 1."));
-    }
-    var numPages = pdf.numPages;
-    if (pageNumber > numPages) {
-      return new Error("Expected `".concat(propName, "` to be less or equal to ").concat(numPages, "."));
-    }
-  } else if (!isDefined(pageIndex)) {
-    return new Error("`".concat(propName, "` not supplied. Either pageIndex or pageNumber must be supplied to `").concat(componentName, "`."));
-  }
-  return null;
-};
-var isPdf = PropTypes2.oneOfType([PropTypes2.shape({
-  getDestination: PropTypes2.func.isRequired,
-  getOutline: PropTypes2.func.isRequired,
-  getPage: PropTypes2.func.isRequired,
-  numPages: PropTypes2.number.isRequired
-}), PropTypes2.bool]);
-var isRef = PropTypes2.oneOfType([PropTypes2.func, PropTypes2.shape({
-  current: PropTypes2.any
-})]);
-var isRenderMode = PropTypes2.oneOf(["canvas", "none", "svg"]);
-var isRotate = PropTypes2.oneOf([0, 90, 180, 270]);
-
 // dist/esm/Document.js
 var _excluded = ["url"];
 function ownKeys(object, enumerableOnly) {
@@ -632,7 +531,7 @@ var Document = /* @__PURE__ */ function(_PureComponent) {
             return;
           }
         }
-        if (_typeof2(file) !== "object") {
+        if (_typeof(file) !== "object") {
           throw new Error("Invalid parameter in file, need either Uint8Array, string or a parameter object");
         }
         if (!file.url && !file.data && !file.range) {
@@ -769,25 +668,6 @@ Document.defaultProps = {
     }
   }
 };
-var isFunctionOrNode = PropTypes3.oneOfType([PropTypes3.func, PropTypes3.node]);
-Document.propTypes = _objectSpread(_objectSpread({}, eventProps), {}, {
-  children: PropTypes3.node,
-  className: isClassName,
-  error: isFunctionOrNode,
-  file: isFile2,
-  imageResourcesPath: PropTypes3.string,
-  inputRef: isRef,
-  loading: isFunctionOrNode,
-  noData: isFunctionOrNode,
-  onItemClick: PropTypes3.func,
-  onLoadError: PropTypes3.func,
-  onLoadProgress: PropTypes3.func,
-  onLoadSuccess: PropTypes3.func,
-  onPassword: PropTypes3.func,
-  onSourceError: PropTypes3.func,
-  onSourceSuccess: PropTypes3.func,
-  rotate: PropTypes3.number
-});
 
 // dist/esm/Outline.js
 import _extends3 from "@babel/runtime/helpers/esm/extends";
@@ -799,7 +679,6 @@ import _possibleConstructorReturn3 from "@babel/runtime/helpers/esm/possibleCons
 import _getPrototypeOf3 from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _defineProperty3 from "@babel/runtime/helpers/esm/defineProperty";
 import React4, { PureComponent as PureComponent3 } from "react";
-import PropTypes5 from "prop-types";
 import makeCancellable2 from "make-cancellable-promise";
 import makeEventProps2 from "make-event-props";
 import mergeClassNames2 from "merge-class-names";
@@ -820,7 +699,6 @@ import _possibleConstructorReturn2 from "@babel/runtime/helpers/esm/possibleCons
 import _getPrototypeOf2 from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _defineProperty2 from "@babel/runtime/helpers/esm/defineProperty";
 import React3, { PureComponent as PureComponent2 } from "react";
-import PropTypes4 from "prop-types";
 
 // dist/esm/Ref.js
 import _classCallCheck3 from "@babel/runtime/helpers/esm/classCallCheck";
@@ -975,19 +853,6 @@ var OutlineItemInternal = /* @__PURE__ */ function(_PureComponent) {
   }]);
   return OutlineItemInternal2;
 }(PureComponent2);
-var isDestination = PropTypes4.oneOfType([PropTypes4.string, PropTypes4.arrayOf(PropTypes4.any)]);
-OutlineItemInternal.propTypes = {
-  item: PropTypes4.shape({
-    dest: isDestination,
-    items: PropTypes4.arrayOf(PropTypes4.shape({
-      dest: isDestination,
-      title: PropTypes4.string
-    })),
-    title: PropTypes4.string
-  }).isRequired,
-  onClick: PropTypes4.func,
-  pdf: isPdf.isRequired
-};
 var OutlineItem = function OutlineItem2(props) {
   return /* @__PURE__ */ React3.createElement(DocumentContext_default.Consumer, null, function(documentContext) {
     return /* @__PURE__ */ React3.createElement(OutlineContext_default.Consumer, null, function(outlineContext) {
@@ -998,36 +863,6 @@ var OutlineItem = function OutlineItem2(props) {
 var OutlineItem_default = OutlineItem;
 
 // dist/esm/Outline.js
-function ownKeys2(object, enumerableOnly) {
-  var keys = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) {
-      symbols = symbols.filter(function(sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-    keys.push.apply(keys, symbols);
-  }
-  return keys;
-}
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    if (i % 2) {
-      ownKeys2(Object(source), true).forEach(function(key) {
-        _defineProperty3(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys2(Object(source)).forEach(function(key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-  return target;
-}
 function _createSuper3(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct3();
   return function _createSuperInternal() {
@@ -1183,14 +1018,6 @@ var OutlineInternal = /* @__PURE__ */ function(_PureComponent) {
   }]);
   return OutlineInternal2;
 }(PureComponent3);
-OutlineInternal.propTypes = _objectSpread2({
-  className: isClassName,
-  inputRef: isRef,
-  onItemClick: PropTypes5.func,
-  onLoadError: PropTypes5.func,
-  onLoadSuccess: PropTypes5.func,
-  pdf: isPdf
-}, eventProps);
 function Outline(props, ref) {
   return /* @__PURE__ */ React4.createElement(DocumentContext_default.Consumer, null, function(context) {
     return /* @__PURE__ */ React4.createElement(OutlineInternal, _extends3({
@@ -1201,16 +1028,15 @@ function Outline(props, ref) {
 var Outline_default = /* @__PURE__ */ React4.forwardRef(Outline);
 
 // dist/esm/Page.js
-import _extends9 from "@babel/runtime/helpers/esm/extends";
-import _classCallCheck11 from "@babel/runtime/helpers/esm/classCallCheck";
-import _createClass11 from "@babel/runtime/helpers/esm/createClass";
-import _assertThisInitialized9 from "@babel/runtime/helpers/esm/assertThisInitialized";
-import _inherits9 from "@babel/runtime/helpers/esm/inherits";
-import _possibleConstructorReturn9 from "@babel/runtime/helpers/esm/possibleConstructorReturn";
-import _getPrototypeOf9 from "@babel/runtime/helpers/esm/getPrototypeOf";
-import _defineProperty9 from "@babel/runtime/helpers/esm/defineProperty";
-import React10, { PureComponent as PureComponent9 } from "react";
-import PropTypes11 from "prop-types";
+import _extends8 from "@babel/runtime/helpers/esm/extends";
+import _classCallCheck10 from "@babel/runtime/helpers/esm/classCallCheck";
+import _createClass10 from "@babel/runtime/helpers/esm/createClass";
+import _assertThisInitialized8 from "@babel/runtime/helpers/esm/assertThisInitialized";
+import _inherits8 from "@babel/runtime/helpers/esm/inherits";
+import _possibleConstructorReturn8 from "@babel/runtime/helpers/esm/possibleConstructorReturn";
+import _getPrototypeOf8 from "@babel/runtime/helpers/esm/getPrototypeOf";
+import _defineProperty8 from "@babel/runtime/helpers/esm/defineProperty";
+import React9, { PureComponent as PureComponent8 } from "react";
 import makeCancellable5 from "make-cancellable-promise";
 import makeEventProps3 from "make-event-props";
 import mergeClassNames3 from "merge-class-names";
@@ -1230,7 +1056,6 @@ import _possibleConstructorReturn4 from "@babel/runtime/helpers/esm/possibleCons
 import _getPrototypeOf4 from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _defineProperty4 from "@babel/runtime/helpers/esm/defineProperty";
 import React5, { PureComponent as PureComponent4 } from "react";
-import PropTypes6 from "prop-types";
 import mergeRefs from "merge-refs";
 function _createSuper4(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct4();
@@ -1380,23 +1205,27 @@ var PageCanvasInternal = /* @__PURE__ */ function(_PureComponent) {
   }]);
   return PageCanvasInternal2;
 }(PureComponent4);
-PageCanvasInternal.propTypes = {
-  canvasRef: isRef,
-  onRenderError: PropTypes6.func,
-  onRenderSuccess: PropTypes6.func,
-  page: isPage.isRequired,
-  renderInteractiveForms: PropTypes6.bool,
-  rotate: isRotate,
-  scale: PropTypes6.number.isRequired
-};
 function PageCanvas(props) {
   return /* @__PURE__ */ React5.createElement(PageContext_default.Consumer, null, function(context) {
     return /* @__PURE__ */ React5.createElement(PageCanvasInternal, _extends4({}, context, props));
   });
 }
 
-// dist/esm/Page/PageSVG.js
+// dist/esm/Page/TextLayer.js
+import _extends6 from "@babel/runtime/helpers/esm/extends";
+import _classCallCheck8 from "@babel/runtime/helpers/esm/classCallCheck";
+import _createClass8 from "@babel/runtime/helpers/esm/createClass";
+import _assertThisInitialized6 from "@babel/runtime/helpers/esm/assertThisInitialized";
+import _inherits6 from "@babel/runtime/helpers/esm/inherits";
+import _possibleConstructorReturn6 from "@babel/runtime/helpers/esm/possibleConstructorReturn";
+import _getPrototypeOf6 from "@babel/runtime/helpers/esm/getPrototypeOf";
+import _defineProperty6 from "@babel/runtime/helpers/esm/defineProperty";
+import React7, { PureComponent as PureComponent6 } from "react";
+import makeCancellable3 from "make-cancellable-promise";
+
+// dist/esm/Page/TextLayerItem.js
 import _extends5 from "@babel/runtime/helpers/esm/extends";
+import _slicedToArray3 from "@babel/runtime/helpers/esm/slicedToArray";
 import _classCallCheck7 from "@babel/runtime/helpers/esm/classCallCheck";
 import _createClass7 from "@babel/runtime/helpers/esm/createClass";
 import _assertThisInitialized5 from "@babel/runtime/helpers/esm/assertThisInitialized";
@@ -1405,10 +1234,6 @@ import _possibleConstructorReturn5 from "@babel/runtime/helpers/esm/possibleCons
 import _getPrototypeOf5 from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _defineProperty5 from "@babel/runtime/helpers/esm/defineProperty";
 import React6, { PureComponent as PureComponent5 } from "react";
-import PropTypes7 from "prop-types";
-import {
-  SVGGraphics
-} from "pdfjs-dist/build/pdf";
 function _createSuper5(Derived) {
   var hasNativeReflectConstruct = _isNativeReflectConstruct5();
   return function _createSuperInternal() {
@@ -1437,180 +1262,23 @@ function _isNativeReflectConstruct5() {
     return false;
   }
 }
-var PageSVGInternal = /* @__PURE__ */ function(_PureComponent) {
-  _inherits5(PageSVGInternal2, _PureComponent);
-  var _super = _createSuper5(PageSVGInternal2);
-  function PageSVGInternal2() {
-    var _this;
-    _classCallCheck7(this, PageSVGInternal2);
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-    _this = _super.call.apply(_super, [this].concat(args));
-    _defineProperty5(_assertThisInitialized5(_this), "state", {
-      svg: null
-    });
-    _defineProperty5(_assertThisInitialized5(_this), "onRenderSuccess", function() {
-      _this.renderer = null;
-      var _this$props = _this.props, onRenderSuccess = _this$props.onRenderSuccess, page = _this$props.page, scale = _this$props.scale;
-      if (onRenderSuccess)
-        onRenderSuccess(makePageCallback(page, scale));
-    });
-    _defineProperty5(_assertThisInitialized5(_this), "onRenderError", function(error) {
-      if (isCancelException(error)) {
-        return;
-      }
-      errorOnDev(error);
-      var onRenderError = _this.props.onRenderError;
-      if (onRenderError)
-        onRenderError(error);
-    });
-    _defineProperty5(_assertThisInitialized5(_this), "renderSVG", function() {
-      var page = _this.props.page;
-      _this.renderer = page.getOperatorList();
-      return _this.renderer.then(function(operatorList) {
-        var svgGfx = new SVGGraphics(page.commonObjs, page.objs);
-        _this.renderer = svgGfx.getSVG(operatorList, _this.viewport).then(function(svg) {
-          _this.setState({
-            svg
-          }, _this.onRenderSuccess);
-        })["catch"](_this.onRenderError);
-      })["catch"](_this.onRenderError);
-    });
-    _defineProperty5(_assertThisInitialized5(_this), "drawPageOnContainer", function(element) {
-      var svg = _this.state.svg;
-      if (!element || !svg) {
-        return;
-      }
-      if (!element.firstElementChild) {
-        element.appendChild(svg);
-      }
-      var _this$viewport = _this.viewport, width = _this$viewport.width, height = _this$viewport.height;
-      svg.setAttribute("width", width);
-      svg.setAttribute("height", height);
-    });
-    return _this;
-  }
-  _createClass7(PageSVGInternal2, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.renderSVG();
-    }
-  }, {
-    key: "viewport",
-    get: function get() {
-      var _this$props2 = this.props, page = _this$props2.page, rotate = _this$props2.rotate, scale = _this$props2.scale;
-      return page.getViewport({
-        scale,
-        rotation: rotate
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-      var _this$viewport2 = this.viewport, width = _this$viewport2.width, height = _this$viewport2.height;
-      return /* @__PURE__ */ React6.createElement("div", {
-        className: "react-pdf__Page__svg",
-        ref: function ref(_ref) {
-          return _this2.drawPageOnContainer(_ref);
-        },
-        style: {
-          display: "block",
-          backgroundColor: "white",
-          overflow: "hidden",
-          width,
-          height,
-          userSelect: "none"
-        }
-      });
-    }
-  }]);
-  return PageSVGInternal2;
-}(PureComponent5);
-PageSVGInternal.propTypes = {
-  onRenderError: PropTypes7.func,
-  onRenderSuccess: PropTypes7.func,
-  page: isPage.isRequired,
-  rotate: isRotate,
-  scale: PropTypes7.number.isRequired
-};
-function PageSVG(props) {
-  return /* @__PURE__ */ React6.createElement(PageContext_default.Consumer, null, function(context) {
-    return /* @__PURE__ */ React6.createElement(PageSVGInternal, _extends5({}, context, props));
-  });
-}
-
-// dist/esm/Page/TextLayer.js
-import _extends7 from "@babel/runtime/helpers/esm/extends";
-import _classCallCheck9 from "@babel/runtime/helpers/esm/classCallCheck";
-import _createClass9 from "@babel/runtime/helpers/esm/createClass";
-import _assertThisInitialized7 from "@babel/runtime/helpers/esm/assertThisInitialized";
-import _inherits7 from "@babel/runtime/helpers/esm/inherits";
-import _possibleConstructorReturn7 from "@babel/runtime/helpers/esm/possibleConstructorReturn";
-import _getPrototypeOf7 from "@babel/runtime/helpers/esm/getPrototypeOf";
-import _defineProperty7 from "@babel/runtime/helpers/esm/defineProperty";
-import React8, { PureComponent as PureComponent7 } from "react";
-import PropTypes9 from "prop-types";
-import makeCancellable3 from "make-cancellable-promise";
-
-// dist/esm/Page/TextLayerItem.js
-import _extends6 from "@babel/runtime/helpers/esm/extends";
-import _slicedToArray3 from "@babel/runtime/helpers/esm/slicedToArray";
-import _classCallCheck8 from "@babel/runtime/helpers/esm/classCallCheck";
-import _createClass8 from "@babel/runtime/helpers/esm/createClass";
-import _assertThisInitialized6 from "@babel/runtime/helpers/esm/assertThisInitialized";
-import _inherits6 from "@babel/runtime/helpers/esm/inherits";
-import _possibleConstructorReturn6 from "@babel/runtime/helpers/esm/possibleConstructorReturn";
-import _getPrototypeOf6 from "@babel/runtime/helpers/esm/getPrototypeOf";
-import _defineProperty6 from "@babel/runtime/helpers/esm/defineProperty";
-import React7, { PureComponent as PureComponent6 } from "react";
-import PropTypes8 from "prop-types";
-function _createSuper6(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct6();
-  return function _createSuperInternal() {
-    var Super = _getPrototypeOf6(Derived), result;
-    if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf6(this).constructor;
-      result = Reflect.construct(Super, arguments, NewTarget);
-    } else {
-      result = Super.apply(this, arguments);
-    }
-    return _possibleConstructorReturn6(this, result);
-  };
-}
-function _isNativeReflectConstruct6() {
-  if (typeof Reflect === "undefined" || !Reflect.construct)
-    return false;
-  if (Reflect.construct.sham)
-    return false;
-  if (typeof Proxy === "function")
-    return true;
-  try {
-    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function() {
-    }));
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
 var TextLayerItemInternal = /* @__PURE__ */ function(_PureComponent) {
-  _inherits6(TextLayerItemInternal2, _PureComponent);
-  var _super = _createSuper6(TextLayerItemInternal2);
+  _inherits5(TextLayerItemInternal2, _PureComponent);
+  var _super = _createSuper5(TextLayerItemInternal2);
   function TextLayerItemInternal2() {
     var _this;
-    _classCallCheck8(this, TextLayerItemInternal2);
+    _classCallCheck7(this, TextLayerItemInternal2);
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
     _this = _super.call.apply(_super, [this].concat(args));
-    _defineProperty6(_assertThisInitialized6(_this), "getElementWidth", function(element) {
-      var _assertThisInitialize = _assertThisInitialized6(_this), sideways = _assertThisInitialize.sideways;
+    _defineProperty5(_assertThisInitialized5(_this), "getElementWidth", function(element) {
+      var _assertThisInitialize = _assertThisInitialized5(_this), sideways = _assertThisInitialize.sideways;
       return element.getBoundingClientRect()[sideways ? "height" : "width"];
     });
     return _this;
   }
-  _createClass8(TextLayerItemInternal2, [{
+  _createClass7(TextLayerItemInternal2, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.alignTextItem();
@@ -1711,7 +1379,7 @@ var TextLayerItemInternal = /* @__PURE__ */ function(_PureComponent) {
       var _this3 = this;
       var fontSize = this.fontSize, top = this.top, left = this.left;
       var _this$props4 = this.props, customTextRenderer = _this$props4.customTextRenderer, scale = _this$props4.scale, text = _this$props4.str;
-      return /* @__PURE__ */ React7.createElement("span", {
+      return /* @__PURE__ */ React6.createElement("span", {
         ref: function ref(_ref) {
           _this3.item = _ref;
         },
@@ -1730,39 +1398,28 @@ var TextLayerItemInternal = /* @__PURE__ */ function(_PureComponent) {
     }
   }]);
   return TextLayerItemInternal2;
-}(PureComponent6);
-TextLayerItemInternal.propTypes = {
-  customTextRenderer: PropTypes8.func,
-  fontName: PropTypes8.string.isRequired,
-  itemIndex: PropTypes8.number.isRequired,
-  page: isPage.isRequired,
-  rotate: isRotate,
-  scale: PropTypes8.number,
-  str: PropTypes8.string.isRequired,
-  transform: PropTypes8.arrayOf(PropTypes8.number).isRequired,
-  width: PropTypes8.number.isRequired
-};
+}(PureComponent5);
 function TextLayerItem(props) {
-  return /* @__PURE__ */ React7.createElement(PageContext_default.Consumer, null, function(context) {
-    return /* @__PURE__ */ React7.createElement(TextLayerItemInternal, _extends6({}, context, props));
+  return /* @__PURE__ */ React6.createElement(PageContext_default.Consumer, null, function(context) {
+    return /* @__PURE__ */ React6.createElement(TextLayerItemInternal, _extends5({}, context, props));
   });
 }
 
 // dist/esm/Page/TextLayer.js
-function _createSuper7(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct7();
+function _createSuper6(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct6();
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf7(Derived), result;
+    var Super = _getPrototypeOf6(Derived), result;
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf7(this).constructor;
+      var NewTarget = _getPrototypeOf6(this).constructor;
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
-    return _possibleConstructorReturn7(this, result);
+    return _possibleConstructorReturn6(this, result);
   };
 }
-function _isNativeReflectConstruct7() {
+function _isNativeReflectConstruct6() {
   if (typeof Reflect === "undefined" || !Reflect.construct)
     return false;
   if (Reflect.construct.sham)
@@ -1778,19 +1435,19 @@ function _isNativeReflectConstruct7() {
   }
 }
 var TextLayerInternal = /* @__PURE__ */ function(_PureComponent) {
-  _inherits7(TextLayerInternal2, _PureComponent);
-  var _super = _createSuper7(TextLayerInternal2);
+  _inherits6(TextLayerInternal2, _PureComponent);
+  var _super = _createSuper6(TextLayerInternal2);
   function TextLayerInternal2() {
     var _this;
-    _classCallCheck9(this, TextLayerInternal2);
+    _classCallCheck8(this, TextLayerInternal2);
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
     _this = _super.call.apply(_super, [this].concat(args));
-    _defineProperty7(_assertThisInitialized7(_this), "state", {
+    _defineProperty6(_assertThisInitialized6(_this), "state", {
       textItems: null
     });
-    _defineProperty7(_assertThisInitialized7(_this), "loadTextItems", function() {
+    _defineProperty6(_assertThisInitialized6(_this), "loadTextItems", function() {
       var page = _this.props.page;
       var cancellable = makeCancellable3(page.getTextContent());
       _this.runningTask = cancellable;
@@ -1803,13 +1460,13 @@ var TextLayerInternal = /* @__PURE__ */ function(_PureComponent) {
         _this.onLoadError(error);
       });
     });
-    _defineProperty7(_assertThisInitialized7(_this), "onLoadSuccess", function() {
+    _defineProperty6(_assertThisInitialized6(_this), "onLoadSuccess", function() {
       var onGetTextSuccess = _this.props.onGetTextSuccess;
       var textItems = _this.state.textItems;
       if (onGetTextSuccess)
         onGetTextSuccess(textItems);
     });
-    _defineProperty7(_assertThisInitialized7(_this), "onLoadError", function(error) {
+    _defineProperty6(_assertThisInitialized6(_this), "onLoadError", function(error) {
       _this.setState({
         textItems: false
       });
@@ -1820,7 +1477,7 @@ var TextLayerInternal = /* @__PURE__ */ function(_PureComponent) {
     });
     return _this;
   }
-  _createClass9(TextLayerInternal2, [{
+  _createClass8(TextLayerInternal2, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var page = this.props.page;
@@ -1864,7 +1521,7 @@ var TextLayerInternal = /* @__PURE__ */ function(_PureComponent) {
         return null;
       }
       return textItems.map(function(textItem, itemIndex) {
-        return /* @__PURE__ */ React8.createElement(TextLayerItem, _extends7({
+        return /* @__PURE__ */ React7.createElement(TextLayerItem, _extends6({
           key: itemIndex,
           itemIndex
         }, textItem));
@@ -1874,7 +1531,7 @@ var TextLayerInternal = /* @__PURE__ */ function(_PureComponent) {
     key: "render",
     value: function render() {
       var viewport = this.unrotatedViewport, rotate = this.rotate;
-      return /* @__PURE__ */ React8.createElement("div", {
+      return /* @__PURE__ */ React7.createElement("div", {
         className: "react-pdf__Page__textContent",
         style: {
           position: "absolute",
@@ -1891,49 +1548,41 @@ var TextLayerInternal = /* @__PURE__ */ function(_PureComponent) {
     }
   }]);
   return TextLayerInternal2;
-}(PureComponent7);
-TextLayerInternal.propTypes = {
-  onGetTextError: PropTypes9.func,
-  onGetTextSuccess: PropTypes9.func,
-  page: isPage.isRequired,
-  rotate: isRotate,
-  scale: PropTypes9.number
-};
+}(PureComponent6);
 function TextLayer(props) {
-  return /* @__PURE__ */ React8.createElement(PageContext_default.Consumer, null, function(context) {
-    return /* @__PURE__ */ React8.createElement(TextLayerInternal, _extends7({}, context, props));
+  return /* @__PURE__ */ React7.createElement(PageContext_default.Consumer, null, function(context) {
+    return /* @__PURE__ */ React7.createElement(TextLayerInternal, _extends6({}, context, props));
   });
 }
 
 // dist/esm/Page/AnnotationLayer.js
-import _extends8 from "@babel/runtime/helpers/esm/extends";
-import _classCallCheck10 from "@babel/runtime/helpers/esm/classCallCheck";
-import _createClass10 from "@babel/runtime/helpers/esm/createClass";
-import _assertThisInitialized8 from "@babel/runtime/helpers/esm/assertThisInitialized";
-import _inherits8 from "@babel/runtime/helpers/esm/inherits";
-import _possibleConstructorReturn8 from "@babel/runtime/helpers/esm/possibleConstructorReturn";
-import _getPrototypeOf8 from "@babel/runtime/helpers/esm/getPrototypeOf";
-import _defineProperty8 from "@babel/runtime/helpers/esm/defineProperty";
-import React9, { PureComponent as PureComponent8 } from "react";
-import PropTypes10 from "prop-types";
+import _extends7 from "@babel/runtime/helpers/esm/extends";
+import _classCallCheck9 from "@babel/runtime/helpers/esm/classCallCheck";
+import _createClass9 from "@babel/runtime/helpers/esm/createClass";
+import _assertThisInitialized7 from "@babel/runtime/helpers/esm/assertThisInitialized";
+import _inherits7 from "@babel/runtime/helpers/esm/inherits";
+import _possibleConstructorReturn7 from "@babel/runtime/helpers/esm/possibleConstructorReturn";
+import _getPrototypeOf7 from "@babel/runtime/helpers/esm/getPrototypeOf";
+import _defineProperty7 from "@babel/runtime/helpers/esm/defineProperty";
+import React8, { PureComponent as PureComponent7 } from "react";
 import {
   AnnotationLayer
-} from "pdfjs-dist/build/pdf";
+} from "pdfjs-dist";
 import makeCancellable4 from "make-cancellable-promise";
-function _createSuper8(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct8();
+function _createSuper7(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct7();
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf8(Derived), result;
+    var Super = _getPrototypeOf7(Derived), result;
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf8(this).constructor;
+      var NewTarget = _getPrototypeOf7(this).constructor;
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
-    return _possibleConstructorReturn8(this, result);
+    return _possibleConstructorReturn7(this, result);
   };
 }
-function _isNativeReflectConstruct8() {
+function _isNativeReflectConstruct7() {
   if (typeof Reflect === "undefined" || !Reflect.construct)
     return false;
   if (Reflect.construct.sham)
@@ -1949,19 +1598,19 @@ function _isNativeReflectConstruct8() {
   }
 }
 var AnnotationLayerInternal = /* @__PURE__ */ function(_PureComponent) {
-  _inherits8(AnnotationLayerInternal2, _PureComponent);
-  var _super = _createSuper8(AnnotationLayerInternal2);
+  _inherits7(AnnotationLayerInternal2, _PureComponent);
+  var _super = _createSuper7(AnnotationLayerInternal2);
   function AnnotationLayerInternal2() {
     var _this;
-    _classCallCheck10(this, AnnotationLayerInternal2);
+    _classCallCheck9(this, AnnotationLayerInternal2);
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
     _this = _super.call.apply(_super, [this].concat(args));
-    _defineProperty8(_assertThisInitialized8(_this), "state", {
+    _defineProperty7(_assertThisInitialized7(_this), "state", {
       annotations: null
     });
-    _defineProperty8(_assertThisInitialized8(_this), "loadAnnotations", function() {
+    _defineProperty7(_assertThisInitialized7(_this), "loadAnnotations", function() {
       var page = _this.props.page;
       var cancellable = makeCancellable4(page.getAnnotations());
       _this.runningTask = cancellable;
@@ -1973,13 +1622,13 @@ var AnnotationLayerInternal = /* @__PURE__ */ function(_PureComponent) {
         _this.onLoadError(error);
       });
     });
-    _defineProperty8(_assertThisInitialized8(_this), "onLoadSuccess", function() {
+    _defineProperty7(_assertThisInitialized7(_this), "onLoadSuccess", function() {
       var onGetAnnotationsSuccess = _this.props.onGetAnnotationsSuccess;
       var annotations = _this.state.annotations;
       if (onGetAnnotationsSuccess)
         onGetAnnotationsSuccess(annotations);
     });
-    _defineProperty8(_assertThisInitialized8(_this), "onLoadError", function(error) {
+    _defineProperty7(_assertThisInitialized7(_this), "onLoadError", function(error) {
       _this.setState({
         annotations: false
       });
@@ -1988,12 +1637,12 @@ var AnnotationLayerInternal = /* @__PURE__ */ function(_PureComponent) {
       if (onGetAnnotationsError)
         onGetAnnotationsError(error);
     });
-    _defineProperty8(_assertThisInitialized8(_this), "onRenderSuccess", function() {
+    _defineProperty7(_assertThisInitialized7(_this), "onRenderSuccess", function() {
       var onRenderAnnotationLayerSuccess = _this.props.onRenderAnnotationLayerSuccess;
       if (onRenderAnnotationLayerSuccess)
         onRenderAnnotationLayerSuccess();
     });
-    _defineProperty8(_assertThisInitialized8(_this), "onRenderError", function(error) {
+    _defineProperty7(_assertThisInitialized7(_this), "onRenderError", function(error) {
       errorOnDev(error);
       var onRenderAnnotationLayerError = _this.props.onRenderAnnotationLayerError;
       if (onRenderAnnotationLayerError)
@@ -2001,7 +1650,7 @@ var AnnotationLayerInternal = /* @__PURE__ */ function(_PureComponent) {
     });
     return _this;
   }
-  _createClass10(AnnotationLayerInternal2, [{
+  _createClass9(AnnotationLayerInternal2, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var page = this.props.page;
@@ -2064,7 +1713,7 @@ var AnnotationLayerInternal = /* @__PURE__ */ function(_PureComponent) {
     key: "render",
     value: function render() {
       var _this2 = this;
-      return /* @__PURE__ */ React9.createElement("div", {
+      return /* @__PURE__ */ React8.createElement("div", {
         className: "react-pdf__Page__annotations annotationLayer",
         ref: function ref(_ref) {
           _this2.annotationLayer = _ref;
@@ -2073,73 +1722,31 @@ var AnnotationLayerInternal = /* @__PURE__ */ function(_PureComponent) {
     }
   }]);
   return AnnotationLayerInternal2;
-}(PureComponent8);
-AnnotationLayerInternal.propTypes = {
-  imageResourcesPath: PropTypes10.string,
-  linkService: isLinkService.isRequired,
-  onGetAnnotationsError: PropTypes10.func,
-  onGetAnnotationsSuccess: PropTypes10.func,
-  onRenderAnnotationLayerError: PropTypes10.func,
-  onRenderAnnotationLayerSuccess: PropTypes10.func,
-  page: isPage,
-  renderInteractiveForms: PropTypes10.bool,
-  rotate: isRotate,
-  scale: PropTypes10.number
-};
+}(PureComponent7);
 var AnnotationLayer2 = function AnnotationLayer3(props) {
-  return /* @__PURE__ */ React9.createElement(DocumentContext_default.Consumer, null, function(documentContext) {
-    return /* @__PURE__ */ React9.createElement(PageContext_default.Consumer, null, function(pageContext) {
-      return /* @__PURE__ */ React9.createElement(AnnotationLayerInternal, _extends8({}, documentContext, pageContext, props));
+  return /* @__PURE__ */ React8.createElement(DocumentContext_default.Consumer, null, function(documentContext) {
+    return /* @__PURE__ */ React8.createElement(PageContext_default.Consumer, null, function(pageContext) {
+      return /* @__PURE__ */ React8.createElement(AnnotationLayerInternal, _extends7({}, documentContext, pageContext, props));
     });
   });
 };
 var AnnotationLayer_default = AnnotationLayer2;
 
 // dist/esm/Page.js
-function ownKeys3(object, enumerableOnly) {
-  var keys = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) {
-      symbols = symbols.filter(function(sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-    keys.push.apply(keys, symbols);
-  }
-  return keys;
-}
-function _objectSpread3(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    if (i % 2) {
-      ownKeys3(Object(source), true).forEach(function(key) {
-        _defineProperty9(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys3(Object(source)).forEach(function(key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-  return target;
-}
-function _createSuper9(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct9();
+function _createSuper8(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct8();
   return function _createSuperInternal() {
-    var Super = _getPrototypeOf9(Derived), result;
+    var Super = _getPrototypeOf8(Derived), result;
     if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf9(this).constructor;
+      var NewTarget = _getPrototypeOf8(this).constructor;
       result = Reflect.construct(Super, arguments, NewTarget);
     } else {
       result = Super.apply(this, arguments);
     }
-    return _possibleConstructorReturn9(this, result);
+    return _possibleConstructorReturn8(this, result);
   };
 }
-function _isNativeReflectConstruct9() {
+function _isNativeReflectConstruct8() {
   if (typeof Reflect === "undefined" || !Reflect.construct)
     return false;
   if (Reflect.construct.sham)
@@ -2156,19 +1763,19 @@ function _isNativeReflectConstruct9() {
 }
 var defaultScale = 1;
 var PageInternal = /* @__PURE__ */ function(_PureComponent) {
-  _inherits9(PageInternal2, _PureComponent);
-  var _super = _createSuper9(PageInternal2);
+  _inherits8(PageInternal2, _PureComponent);
+  var _super = _createSuper8(PageInternal2);
   function PageInternal2() {
     var _this;
-    _classCallCheck11(this, PageInternal2);
+    _classCallCheck10(this, PageInternal2);
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
     _this = _super.call.apply(_super, [this].concat(args));
-    _defineProperty9(_assertThisInitialized9(_this), "state", {
+    _defineProperty8(_assertThisInitialized8(_this), "state", {
       page: null
     });
-    _defineProperty9(_assertThisInitialized9(_this), "onLoadSuccess", function() {
+    _defineProperty8(_assertThisInitialized8(_this), "onLoadSuccess", function() {
       var _this$props = _this.props, onLoadSuccess = _this$props.onLoadSuccess, registerPage = _this$props.registerPage;
       var page = _this.state.page;
       if (onLoadSuccess)
@@ -2176,13 +1783,13 @@ var PageInternal = /* @__PURE__ */ function(_PureComponent) {
       if (registerPage)
         registerPage(_this.pageIndex, _this.ref);
     });
-    _defineProperty9(_assertThisInitialized9(_this), "onLoadError", function(error) {
+    _defineProperty8(_assertThisInitialized8(_this), "onLoadError", function(error) {
       errorOnDev(error);
       var onLoadError = _this.props.onLoadError;
       if (onLoadError)
         onLoadError(error);
     });
-    _defineProperty9(_assertThisInitialized9(_this), "loadPage", function() {
+    _defineProperty8(_assertThisInitialized8(_this), "loadPage", function() {
       var pdf = _this.props.pdf;
       var pageNumber = _this.getPageNumber();
       if (!pageNumber) {
@@ -2211,7 +1818,7 @@ var PageInternal = /* @__PURE__ */ function(_PureComponent) {
     });
     return _this;
   }
-  _createClass11(PageInternal2, [{
+  _createClass10(PageInternal2, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var pdf = this.props.pdf;
@@ -2361,13 +1968,9 @@ var PageInternal = /* @__PURE__ */ function(_PureComponent) {
       switch (renderMode) {
         case "none":
           return null;
-        case "svg":
-          return /* @__PURE__ */ React10.createElement(PageSVG, {
-            key: "".concat(this.pageKeyNoScale, "_svg")
-          });
         case "canvas":
         default:
-          return /* @__PURE__ */ React10.createElement(PageCanvas, {
+          return /* @__PURE__ */ React9.createElement(PageCanvas, {
             key: "".concat(this.pageKey, "_canvas"),
             canvasRef
           });
@@ -2380,7 +1983,7 @@ var PageInternal = /* @__PURE__ */ function(_PureComponent) {
       if (!renderTextLayer2) {
         return null;
       }
-      return /* @__PURE__ */ React10.createElement(TextLayer, {
+      return /* @__PURE__ */ React9.createElement(TextLayer, {
         key: "".concat(this.pageKey, "_text")
       });
     }
@@ -2391,7 +1994,7 @@ var PageInternal = /* @__PURE__ */ function(_PureComponent) {
       if (!renderAnnotationLayer2) {
         return null;
       }
-      return /* @__PURE__ */ React10.createElement(AnnotationLayer_default, {
+      return /* @__PURE__ */ React9.createElement(AnnotationLayer_default, {
         key: "".concat(this.pageKey, "_annotations")
       });
     }
@@ -2399,7 +2002,7 @@ var PageInternal = /* @__PURE__ */ function(_PureComponent) {
     key: "renderChildren",
     value: function renderChildren() {
       var children = this.props.children;
-      return /* @__PURE__ */ React10.createElement(PageContext_default.Provider, {
+      return /* @__PURE__ */ React9.createElement(PageContext_default.Provider, {
         value: this.childContext
       }, this.renderMainLayer(), this.renderTextLayer(), this.renderAnnotationLayer(), children);
     }
@@ -2411,19 +2014,19 @@ var PageInternal = /* @__PURE__ */ function(_PureComponent) {
       var page = this.state.page;
       if (!pageNumber) {
         var noData = this.props.noData;
-        return /* @__PURE__ */ React10.createElement(Message, {
+        return /* @__PURE__ */ React9.createElement(Message, {
           type: "no-data"
         }, typeof noData === "function" ? noData() : noData);
       }
       if (pdf === null || page === null) {
         var loading = this.props.loading;
-        return /* @__PURE__ */ React10.createElement(Message, {
+        return /* @__PURE__ */ React9.createElement(Message, {
           type: "loading"
         }, typeof loading === "function" ? loading() : loading);
       }
       if (pdf === false || page === false) {
         var error = this.props.error;
-        return /* @__PURE__ */ React10.createElement(Message, {
+        return /* @__PURE__ */ React9.createElement(Message, {
           type: "error"
         }, typeof error === "function" ? error() : error);
       }
@@ -2434,7 +2037,7 @@ var PageInternal = /* @__PURE__ */ function(_PureComponent) {
     value: function render() {
       var pageNumber = this.pageNumber;
       var _this$props5 = this.props, className = _this$props5.className, inputRef = _this$props5.inputRef;
-      return /* @__PURE__ */ React10.createElement("div", _extends9({
+      return /* @__PURE__ */ React9.createElement("div", _extends8({
         className: mergeClassNames3("react-pdf__Page", className),
         "data-page-number": pageNumber,
         ref: mergeRefs2(inputRef, this.ref),
@@ -2445,7 +2048,7 @@ var PageInternal = /* @__PURE__ */ function(_PureComponent) {
     }
   }]);
   return PageInternal2;
-}(PureComponent9);
+}(PureComponent8);
 PageInternal.defaultProps = {
   error: "Failed to load the page.",
   loading: "Loading page\u2026",
@@ -2456,53 +2059,23 @@ PageInternal.defaultProps = {
   renderTextLayer: true,
   scale: defaultScale
 };
-var isFunctionOrNode2 = PropTypes11.oneOfType([PropTypes11.func, PropTypes11.node]);
-PageInternal.propTypes = _objectSpread3(_objectSpread3({}, eventProps), {}, {
-  children: PropTypes11.node,
-  className: isClassName,
-  customTextRenderer: PropTypes11.func,
-  error: isFunctionOrNode2,
-  height: PropTypes11.number,
-  imageResourcesPath: PropTypes11.string,
-  inputRef: isRef,
-  loading: isFunctionOrNode2,
-  noData: isFunctionOrNode2,
-  onGetTextError: PropTypes11.func,
-  onGetTextSuccess: PropTypes11.func,
-  onLoadError: PropTypes11.func,
-  onLoadSuccess: PropTypes11.func,
-  onRenderError: PropTypes11.func,
-  onRenderSuccess: PropTypes11.func,
-  pageIndex: isPageIndex,
-  pageNumber: isPageNumber,
-  pdf: isPdf,
-  registerPage: PropTypes11.func,
-  renderAnnotationLayer: PropTypes11.bool,
-  renderInteractiveForms: PropTypes11.bool,
-  renderMode: isRenderMode,
-  renderTextLayer: PropTypes11.bool,
-  rotate: isRotate,
-  scale: PropTypes11.number,
-  unregisterPage: PropTypes11.func,
-  width: PropTypes11.number
-});
 function Page(props, ref) {
-  return /* @__PURE__ */ React10.createElement(DocumentContext_default.Consumer, null, function(context) {
-    return /* @__PURE__ */ React10.createElement(PageInternal, _extends9({
+  return /* @__PURE__ */ React9.createElement(DocumentContext_default.Consumer, null, function(context) {
+    return /* @__PURE__ */ React9.createElement(PageInternal, _extends8({
       ref
     }, context, props));
   });
 }
-var Page_default = /* @__PURE__ */ React10.forwardRef(Page);
+var Page_default = /* @__PURE__ */ React9.forwardRef(Page);
 
 // dist/esm/entry.js
 if (isLocalFileSystem) {
   warnOnDev("You are running React-PDF from your local file system. PDF.js Worker may fail to load due to browser's security policies. If you're on Google Chrome, you can use --allow-file-access-from-files flag for debugging purposes.");
 }
-pdfjs4.GlobalWorkerOptions.workerSrc = "pdf.worker.js";
+pdfjs3.GlobalWorkerOptions.workerSrc = "pdf.worker.js";
 export {
   Document,
   Outline_default as Outline,
   Page_default as Page,
-  pdfjs4 as pdfjs
+  pdfjs3 as pdfjs
 };

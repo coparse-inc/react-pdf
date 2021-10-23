@@ -12,11 +12,9 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import mergeRefs from 'merge-refs';
 import PageContext from '../PageContext';
 import { errorOnDev, getPixelRatio, isCancelException, makePageCallback } from '../shared/utils';
-import { isPage, isRef, isRotate } from '../shared/propTypes';
 export var PageCanvasInternal = /*#__PURE__*/function (_PureComponent) {
   _inherits(PageCanvasInternal, _PureComponent);
 
@@ -181,15 +179,6 @@ export var PageCanvasInternal = /*#__PURE__*/function (_PureComponent) {
 
   return PageCanvasInternal;
 }(PureComponent);
-PageCanvasInternal.propTypes = {
-  canvasRef: isRef,
-  onRenderError: PropTypes.func,
-  onRenderSuccess: PropTypes.func,
-  page: isPage.isRequired,
-  renderInteractiveForms: PropTypes.bool,
-  rotate: isRotate,
-  scale: PropTypes.number.isRequired
-};
 export default function PageCanvas(props) {
   return /*#__PURE__*/React.createElement(PageContext.Consumer, null, function (context) {
     return /*#__PURE__*/React.createElement(PageCanvasInternal, _extends({}, context, props));

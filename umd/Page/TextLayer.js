@@ -28,8 +28,6 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _makeCancellablePromise = _interopRequireDefault(require("make-cancellable-promise"));
 
 var _PageContext = _interopRequireDefault(require("../PageContext"));
@@ -37,8 +35,6 @@ var _PageContext = _interopRequireDefault(require("../PageContext"));
 var _TextLayerItem = _interopRequireDefault(require("./TextLayerItem"));
 
 var _utils = require("../shared/utils");
-
-var _propTypes2 = require("../shared/propTypes");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -187,13 +183,6 @@ var TextLayerInternal = /*#__PURE__*/function (_PureComponent) {
 }(_react.PureComponent);
 
 exports.TextLayerInternal = TextLayerInternal;
-TextLayerInternal.propTypes = {
-  onGetTextError: _propTypes["default"].func,
-  onGetTextSuccess: _propTypes["default"].func,
-  page: _propTypes2.isPage.isRequired,
-  rotate: _propTypes2.isRotate,
-  scale: _propTypes["default"].number
-};
 
 function TextLayer(props) {
   return /*#__PURE__*/_react["default"].createElement(_PageContext["default"].Consumer, null, function (context) {

@@ -12,13 +12,11 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import * as pdfjs from 'pdfjs-dist/build/pdf';
+import * as pdfjs from 'pdfjs-dist';
 import makeCancellable from 'make-cancellable-promise';
 import DocumentContext from '../DocumentContext';
 import PageContext from '../PageContext';
 import { cancelRunningTask, errorOnDev } from '../shared/utils';
-import { isLinkService, isPage, isRotate } from '../shared/propTypes';
 export var AnnotationLayerInternal = /*#__PURE__*/function (_PureComponent) {
   _inherits(AnnotationLayerInternal, _PureComponent);
 
@@ -172,18 +170,6 @@ export var AnnotationLayerInternal = /*#__PURE__*/function (_PureComponent) {
 
   return AnnotationLayerInternal;
 }(PureComponent);
-AnnotationLayerInternal.propTypes = {
-  imageResourcesPath: PropTypes.string,
-  linkService: isLinkService.isRequired,
-  onGetAnnotationsError: PropTypes.func,
-  onGetAnnotationsSuccess: PropTypes.func,
-  onRenderAnnotationLayerError: PropTypes.func,
-  onRenderAnnotationLayerSuccess: PropTypes.func,
-  page: isPage,
-  renderInteractiveForms: PropTypes.bool,
-  rotate: isRotate,
-  scale: PropTypes.number
-};
 
 var AnnotationLayer = function AnnotationLayer(props) {
   return /*#__PURE__*/React.createElement(DocumentContext.Consumer, null, function (documentContext) {

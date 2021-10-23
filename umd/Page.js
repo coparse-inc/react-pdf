@@ -27,8 +27,6 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _makeCancellablePromise = _interopRequireDefault(require("make-cancellable-promise"));
 
 var _makeEventProps = _interopRequireDefault(require("make-event-props"));
@@ -45,23 +43,15 @@ var _Message = _interopRequireDefault(require("./Message"));
 
 var _PageCanvas = _interopRequireDefault(require("./Page/PageCanvas"));
 
-var _PageSVG = _interopRequireDefault(require("./Page/PageSVG"));
-
 var _TextLayer = _interopRequireDefault(require("./Page/TextLayer"));
 
 var _AnnotationLayer = _interopRequireDefault(require("./Page/AnnotationLayer"));
 
 var _utils = require("./shared/utils");
 
-var _propTypes2 = require("./shared/propTypes");
-
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
@@ -329,11 +319,6 @@ var PageInternal = /*#__PURE__*/function (_PureComponent) {
         case 'none':
           return null;
 
-        case 'svg':
-          return /*#__PURE__*/_react["default"].createElement(_PageSVG["default"], {
-            key: "".concat(this.pageKeyNoScale, "_svg")
-          });
-
         case 'canvas':
         default:
           return /*#__PURE__*/_react["default"].createElement(_PageCanvas["default"], {
@@ -442,38 +427,6 @@ PageInternal.defaultProps = {
   renderTextLayer: true,
   scale: defaultScale
 };
-
-var isFunctionOrNode = _propTypes["default"].oneOfType([_propTypes["default"].func, _propTypes["default"].node]);
-
-PageInternal.propTypes = _objectSpread(_objectSpread({}, _propTypes2.eventProps), {}, {
-  children: _propTypes["default"].node,
-  className: _propTypes2.isClassName,
-  customTextRenderer: _propTypes["default"].func,
-  error: isFunctionOrNode,
-  height: _propTypes["default"].number,
-  imageResourcesPath: _propTypes["default"].string,
-  inputRef: _propTypes2.isRef,
-  loading: isFunctionOrNode,
-  noData: isFunctionOrNode,
-  onGetTextError: _propTypes["default"].func,
-  onGetTextSuccess: _propTypes["default"].func,
-  onLoadError: _propTypes["default"].func,
-  onLoadSuccess: _propTypes["default"].func,
-  onRenderError: _propTypes["default"].func,
-  onRenderSuccess: _propTypes["default"].func,
-  pageIndex: _propTypes2.isPageIndex,
-  pageNumber: _propTypes2.isPageNumber,
-  pdf: _propTypes2.isPdf,
-  registerPage: _propTypes["default"].func,
-  renderAnnotationLayer: _propTypes["default"].bool,
-  renderInteractiveForms: _propTypes["default"].bool,
-  renderMode: _propTypes2.isRenderMode,
-  renderTextLayer: _propTypes["default"].bool,
-  rotate: _propTypes2.isRotate,
-  scale: _propTypes["default"].number,
-  unregisterPage: _propTypes["default"].func,
-  width: _propTypes["default"].number
-});
 
 function Page(props, ref) {
   return /*#__PURE__*/_react["default"].createElement(_DocumentContext["default"].Consumer, null, function (context) {

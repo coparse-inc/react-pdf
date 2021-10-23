@@ -27,9 +27,7 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
-var pdfjs = _interopRequireWildcard(require("pdfjs-dist/build/pdf"));
+var pdfjs = _interopRequireWildcard(require("pdfjs-dist"));
 
 var _makeCancellablePromise = _interopRequireDefault(require("make-cancellable-promise"));
 
@@ -38,8 +36,6 @@ var _DocumentContext = _interopRequireDefault(require("../DocumentContext"));
 var _PageContext = _interopRequireDefault(require("../PageContext"));
 
 var _utils = require("../shared/utils");
-
-var _propTypes2 = require("../shared/propTypes");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -196,18 +192,6 @@ var AnnotationLayerInternal = /*#__PURE__*/function (_PureComponent) {
 }(_react.PureComponent);
 
 exports.AnnotationLayerInternal = AnnotationLayerInternal;
-AnnotationLayerInternal.propTypes = {
-  imageResourcesPath: _propTypes["default"].string,
-  linkService: _propTypes2.isLinkService.isRequired,
-  onGetAnnotationsError: _propTypes["default"].func,
-  onGetAnnotationsSuccess: _propTypes["default"].func,
-  onRenderAnnotationLayerError: _propTypes["default"].func,
-  onRenderAnnotationLayerSuccess: _propTypes["default"].func,
-  page: _propTypes2.isPage,
-  renderInteractiveForms: _propTypes["default"].bool,
-  rotate: _propTypes2.isRotate,
-  scale: _propTypes["default"].number
-};
 
 var AnnotationLayer = function AnnotationLayer(props) {
   return /*#__PURE__*/_react["default"].createElement(_DocumentContext["default"].Consumer, null, function (documentContext) {

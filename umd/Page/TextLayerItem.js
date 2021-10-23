@@ -30,11 +30,7 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _PageContext = _interopRequireDefault(require("../PageContext"));
-
-var _propTypes2 = require("../shared/propTypes");
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
@@ -237,18 +233,6 @@ var TextLayerItemInternal = /*#__PURE__*/function (_PureComponent) {
 }(_react.PureComponent);
 
 exports.TextLayerItemInternal = TextLayerItemInternal;
-TextLayerItemInternal.propTypes = {
-  customTextRenderer: _propTypes["default"].func,
-  fontName: _propTypes["default"].string.isRequired,
-  itemIndex: _propTypes["default"].number.isRequired,
-  // eslint-disable-line react/no-unused-prop-types
-  page: _propTypes2.isPage.isRequired,
-  rotate: _propTypes2.isRotate,
-  scale: _propTypes["default"].number,
-  str: _propTypes["default"].string.isRequired,
-  transform: _propTypes["default"].arrayOf(_propTypes["default"].number).isRequired,
-  width: _propTypes["default"].number.isRequired
-};
 
 function TextLayerItem(props) {
   return /*#__PURE__*/_react["default"].createElement(_PageContext["default"].Consumer, null, function (context) {

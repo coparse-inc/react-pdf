@@ -12,12 +12,10 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import makeCancellable from 'make-cancellable-promise';
 import PageContext from '../PageContext';
 import TextLayerItem from './TextLayerItem';
 import { cancelRunningTask, errorOnDev } from '../shared/utils';
-import { isPage, isRotate } from '../shared/propTypes';
 export var TextLayerInternal = /*#__PURE__*/function (_PureComponent) {
   _inherits(TextLayerInternal, _PureComponent);
 
@@ -161,13 +159,6 @@ export var TextLayerInternal = /*#__PURE__*/function (_PureComponent) {
 
   return TextLayerInternal;
 }(PureComponent);
-TextLayerInternal.propTypes = {
-  onGetTextError: PropTypes.func,
-  onGetTextSuccess: PropTypes.func,
-  page: isPage.isRequired,
-  rotate: isRotate,
-  scale: PropTypes.number
-};
 export default function TextLayer(props) {
   return /*#__PURE__*/React.createElement(PageContext.Consumer, null, function (context) {
     return /*#__PURE__*/React.createElement(TextLayerInternal, _extends({}, context, props));

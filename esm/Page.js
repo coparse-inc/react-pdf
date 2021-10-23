@@ -7,16 +7,11 @@ import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConst
 import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import makeCancellable from 'make-cancellable-promise';
 import makeEventProps from 'make-event-props';
 import mergeClassNames from 'merge-class-names';
@@ -25,11 +20,9 @@ import DocumentContext from './DocumentContext';
 import PageContext from './PageContext';
 import Message from './Message';
 import PageCanvas from './Page/PageCanvas';
-import PageSVG from './Page/PageSVG';
 import TextLayer from './Page/TextLayer';
 import AnnotationLayer from './Page/AnnotationLayer';
 import { cancelRunningTask, errorOnDev, isProvided, makePageCallback } from './shared/utils';
-import { eventProps, isClassName, isPageIndex, isPageNumber, isPdf, isRef, isRenderMode, isRotate } from './shared/propTypes';
 var defaultScale = 1;
 export var PageInternal = /*#__PURE__*/function (_PureComponent) {
   _inherits(PageInternal, _PureComponent);
@@ -296,11 +289,6 @@ export var PageInternal = /*#__PURE__*/function (_PureComponent) {
         case 'none':
           return null;
 
-        case 'svg':
-          return /*#__PURE__*/React.createElement(PageSVG, {
-            key: "".concat(this.pageKeyNoScale, "_svg")
-          });
-
         case 'canvas':
         default:
           return /*#__PURE__*/React.createElement(PageCanvas, {
@@ -408,36 +396,6 @@ PageInternal.defaultProps = {
   renderTextLayer: true,
   scale: defaultScale
 };
-var isFunctionOrNode = PropTypes.oneOfType([PropTypes.func, PropTypes.node]);
-PageInternal.propTypes = _objectSpread(_objectSpread({}, eventProps), {}, {
-  children: PropTypes.node,
-  className: isClassName,
-  customTextRenderer: PropTypes.func,
-  error: isFunctionOrNode,
-  height: PropTypes.number,
-  imageResourcesPath: PropTypes.string,
-  inputRef: isRef,
-  loading: isFunctionOrNode,
-  noData: isFunctionOrNode,
-  onGetTextError: PropTypes.func,
-  onGetTextSuccess: PropTypes.func,
-  onLoadError: PropTypes.func,
-  onLoadSuccess: PropTypes.func,
-  onRenderError: PropTypes.func,
-  onRenderSuccess: PropTypes.func,
-  pageIndex: isPageIndex,
-  pageNumber: isPageNumber,
-  pdf: isPdf,
-  registerPage: PropTypes.func,
-  renderAnnotationLayer: PropTypes.bool,
-  renderInteractiveForms: PropTypes.bool,
-  renderMode: isRenderMode,
-  renderTextLayer: PropTypes.bool,
-  rotate: isRotate,
-  scale: PropTypes.number,
-  unregisterPage: PropTypes.func,
-  width: PropTypes.number
-});
 
 function Page(props, ref) {
   return /*#__PURE__*/React.createElement(DocumentContext.Consumer, null, function (context) {

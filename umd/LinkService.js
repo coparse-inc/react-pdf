@@ -11,7 +11,7 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _pdf = require("pdfjs-dist/build/pdf");
+var _pdfjsDist = require("pdfjs-dist");
 
 /* Copyright 2015 Mozilla Foundation
  *
@@ -73,9 +73,9 @@ var LinkService = /*#__PURE__*/function () {
     key: "addLinkAttributes",
     value: function addLinkAttributes(link, url) {
       var newWindow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      (0, _pdf.addLinkAttributes)(link, {
+      (0, _pdfjsDist.addLinkAttributes)(link, {
         url: url,
-        target: newWindow ? _pdf.LinkTarget.BLANK : this.externalLinkTarget,
+        target: newWindow ? _pdfjsDist.LinkTarget.BLANK : this.externalLinkTarget,
         rel: this.externalLinkRel,
         enabled: this.externalLinkEnabled
       });

@@ -7,16 +7,11 @@ import _possibleConstructorReturn from "@babel/runtime/helpers/esm/possibleConst
 import _getPrototypeOf from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _defineProperty from "@babel/runtime/helpers/esm/defineProperty";
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import makeCancellable from 'make-cancellable-promise';
 import makeEventProps from 'make-event-props';
 import mergeClassNames from 'merge-class-names';
@@ -24,7 +19,6 @@ import DocumentContext from './DocumentContext';
 import OutlineContext from './OutlineContext';
 import OutlineItem from './OutlineItem';
 import { cancelRunningTask, errorOnDev } from './shared/utils';
-import { eventProps, isClassName, isPdf, isRef } from './shared/propTypes';
 export var OutlineInternal = /*#__PURE__*/function (_PureComponent) {
   _inherits(OutlineInternal, _PureComponent);
 
@@ -182,14 +176,6 @@ export var OutlineInternal = /*#__PURE__*/function (_PureComponent) {
 
   return OutlineInternal;
 }(PureComponent);
-OutlineInternal.propTypes = _objectSpread({
-  className: isClassName,
-  inputRef: isRef,
-  onItemClick: PropTypes.func,
-  onLoadError: PropTypes.func,
-  onLoadSuccess: PropTypes.func,
-  pdf: isPdf
-}, eventProps);
 
 function Outline(props, ref) {
   return /*#__PURE__*/React.createElement(DocumentContext.Consumer, null, function (context) {

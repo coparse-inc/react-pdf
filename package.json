@@ -4,6 +4,7 @@
   "description": "Display PDFs in your React app as easily as if they were images.",
   "main": "umd/entry.js",
   "module": "esm/entry.js",
+  "types": "types/react-pdf.d.ts",
   "keywords": [
     "pdf",
     "pdf-viewer",
@@ -62,8 +63,7 @@
     "make-cancellable-promise": "^1.0.0",
     "make-event-props": "^1.1.0",
     "merge-class-names": "^1.1.1",
-    "merge-refs": "^1.0.0",
-    "prop-types": "^15.6.2"
+    "merge-refs": "^1.0.0"
   },
   "peerDependencies": {
     "pdfjs-dist": "*",

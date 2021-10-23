@@ -31,15 +31,13 @@ var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/de
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _makeEventProps = _interopRequireDefault(require("make-event-props"));
 
 var _makeCancellablePromise = _interopRequireDefault(require("make-cancellable-promise"));
 
 var _mergeClassNames = _interopRequireDefault(require("merge-class-names"));
 
-var pdfjs = _interopRequireWildcard(require("pdfjs-dist/build/pdf"));
+var pdfjs = _interopRequireWildcard(require("pdfjs-dist"));
 
 var _DocumentContext = _interopRequireDefault(require("./DocumentContext"));
 
@@ -50,8 +48,6 @@ var _LinkService = _interopRequireDefault(require("./LinkService"));
 var _PasswordResponses = _interopRequireDefault(require("./PasswordResponses"));
 
 var _utils = require("./shared/utils");
-
-var _propTypes2 = require("./shared/propTypes");
 
 var _excluded = ["url"];
 
@@ -447,24 +443,3 @@ Document.defaultProps = {
     }
   }
 };
-
-var isFunctionOrNode = _propTypes["default"].oneOfType([_propTypes["default"].func, _propTypes["default"].node]);
-
-Document.propTypes = _objectSpread(_objectSpread({}, _propTypes2.eventProps), {}, {
-  children: _propTypes["default"].node,
-  className: _propTypes2.isClassName,
-  error: isFunctionOrNode,
-  file: _propTypes2.isFile,
-  imageResourcesPath: _propTypes["default"].string,
-  inputRef: _propTypes2.isRef,
-  loading: isFunctionOrNode,
-  noData: isFunctionOrNode,
-  onItemClick: _propTypes["default"].func,
-  onLoadError: _propTypes["default"].func,
-  onLoadProgress: _propTypes["default"].func,
-  onLoadSuccess: _propTypes["default"].func,
-  onPassword: _propTypes["default"].func,
-  onSourceError: _propTypes["default"].func,
-  onSourceSuccess: _propTypes["default"].func,
-  rotate: _propTypes["default"].number
-});

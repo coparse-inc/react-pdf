@@ -17,7 +17,7 @@ import _createClass from "@babel/runtime/helpers/esm/createClass";
  */
 
 /* eslint-disable class-methods-use-this, no-empty-function */
-import { addLinkAttributes as _addLinkAttributes, LinkTarget } from 'pdfjs-dist/build/pdf';
+import { addLinkAttributes as _addLinkAttributes, LinkTarget } from 'pdfjs-dist';
 
 var LinkService = /*#__PURE__*/function () {
   function LinkService() {
