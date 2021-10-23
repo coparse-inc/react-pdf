@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import makeCancellable from 'make-cancellable-promise';
 
 import PageContext from '../PageContext';
@@ -10,8 +9,6 @@ import {
   cancelRunningTask,
   errorOnDev,
 } from '../shared/utils';
-
-import { isPage, isRotate } from '../shared/propTypes';
 
 export class TextLayerInternal extends PureComponent {
   state = {
@@ -127,14 +124,6 @@ export class TextLayerInternal extends PureComponent {
     );
   }
 }
-
-TextLayerInternal.propTypes = {
-  onGetTextError: PropTypes.func,
-  onGetTextSuccess: PropTypes.func,
-  page: isPage.isRequired,
-  rotate: isRotate,
-  scale: PropTypes.number,
-};
 
 export default function TextLayer(props) {
   return (

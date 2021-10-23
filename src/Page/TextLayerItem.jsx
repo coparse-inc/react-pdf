@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 
 import PageContext from '../PageContext';
-
-import { isPage, isRotate } from '../shared/propTypes';
 
 export class TextLayerItemInternal extends PureComponent {
   componentDidMount() {
@@ -136,18 +133,6 @@ export class TextLayerItemInternal extends PureComponent {
     );
   }
 }
-
-TextLayerItemInternal.propTypes = {
-  customTextRenderer: PropTypes.func,
-  fontName: PropTypes.string.isRequired,
-  itemIndex: PropTypes.number.isRequired, // eslint-disable-line react/no-unused-prop-types
-  page: isPage.isRequired,
-  rotate: isRotate,
-  scale: PropTypes.number,
-  str: PropTypes.string.isRequired,
-  transform: PropTypes.arrayOf(PropTypes.number).isRequired,
-  width: PropTypes.number.isRequired,
-};
 
 export default function TextLayerItem(props) {
   return (

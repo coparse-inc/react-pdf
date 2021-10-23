@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import makeCancellable from 'make-cancellable-promise';
 import makeEventProps from 'make-event-props';
 import mergeClassNames from 'merge-class-names';
@@ -20,17 +19,6 @@ import {
   isProvided,
   makePageCallback,
 } from './shared/utils';
-
-import {
-  eventProps,
-  isClassName,
-  isPageIndex,
-  isPageNumber,
-  isPdf,
-  isRef,
-  isRenderMode,
-  isRotate,
-} from './shared/propTypes';
 
 const defaultScale = 1;
 
@@ -391,41 +379,6 @@ PageInternal.defaultProps = {
   scale: defaultScale,
 };
 
-const isFunctionOrNode = PropTypes.oneOfType([
-  PropTypes.func,
-  PropTypes.node,
-]);
-
-PageInternal.propTypes = {
-  ...eventProps,
-  children: PropTypes.node,
-  className: isClassName,
-  customTextRenderer: PropTypes.func,
-  error: isFunctionOrNode,
-  height: PropTypes.number,
-  imageResourcesPath: PropTypes.string,
-  inputRef: isRef,
-  loading: isFunctionOrNode,
-  noData: isFunctionOrNode,
-  onGetTextError: PropTypes.func,
-  onGetTextSuccess: PropTypes.func,
-  onLoadError: PropTypes.func,
-  onLoadSuccess: PropTypes.func,
-  onRenderError: PropTypes.func,
-  onRenderSuccess: PropTypes.func,
-  pageIndex: isPageIndex,
-  pageNumber: isPageNumber,
-  pdf: isPdf,
-  registerPage: PropTypes.func,
-  renderAnnotationLayer: PropTypes.bool,
-  renderInteractiveForms: PropTypes.bool,
-  renderMode: isRenderMode,
-  renderTextLayer: PropTypes.bool,
-  rotate: isRotate,
-  scale: PropTypes.number,
-  unregisterPage: PropTypes.func,
-  width: PropTypes.number,
-};
 
 function Page(props, ref) {
   return (

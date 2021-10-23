@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 
 import DocumentContext from './DocumentContext';
 import OutlineContext from './OutlineContext';
@@ -7,8 +6,6 @@ import OutlineContext from './OutlineContext';
 import Ref from './Ref';
 
 import { isDefined } from './shared/utils';
-
-import { isPdf } from './shared/propTypes';
 
 export class OutlineItemInternal extends PureComponent {
   getDestination = () => new Promise((resolve, reject) => {
@@ -133,24 +130,6 @@ export class OutlineItemInternal extends PureComponent {
     );
   }
 }
-
-const isDestination = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.arrayOf(PropTypes.any),
-]);
-
-OutlineItemInternal.propTypes = {
-  item: PropTypes.shape({
-    dest: isDestination,
-    items: PropTypes.arrayOf(PropTypes.shape({
-      dest: isDestination,
-      title: PropTypes.string,
-    })),
-    title: PropTypes.string,
-  }).isRequired,
-  onClick: PropTypes.func,
-  pdf: isPdf.isRequired,
-};
 
 const OutlineItem = (props) => (
   <DocumentContext.Consumer>

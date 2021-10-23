@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import * as pdfjs from 'pdfjs-dist/build/pdf';
+import * as pdfjs from 'pdfjs-dist';
 
 import PageContext from '../PageContext';
 
@@ -9,8 +8,6 @@ import {
   isCancelException,
   makePageCallback,
 } from '../shared/utils';
-
-import { isPage, isRotate } from '../shared/propTypes';
 
 export class PageSVGInternal extends PureComponent {
   state = {
@@ -107,14 +104,6 @@ export class PageSVGInternal extends PureComponent {
     );
   }
 }
-
-PageSVGInternal.propTypes = {
-  onRenderError: PropTypes.func,
-  onRenderSuccess: PropTypes.func,
-  page: isPage.isRequired,
-  rotate: isRotate,
-  scale: PropTypes.number.isRequired,
-};
 
 export default function PageSVG(props) {
   return (

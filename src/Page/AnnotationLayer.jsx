@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import * as pdfjs from 'pdfjs-dist/build/pdf';
+import * as pdfjs from 'pdfjs-dist';
 import makeCancellable from 'make-cancellable-promise';
 
 import DocumentContext from '../DocumentContext';
@@ -10,8 +9,6 @@ import {
   cancelRunningTask,
   errorOnDev,
 } from '../shared/utils';
-
-import { isLinkService, isPage, isRotate } from '../shared/propTypes';
 
 export class AnnotationLayerInternal extends PureComponent {
   state = {
@@ -145,19 +142,6 @@ export class AnnotationLayerInternal extends PureComponent {
     );
   }
 }
-
-AnnotationLayerInternal.propTypes = {
-  imageResourcesPath: PropTypes.string,
-  linkService: isLinkService.isRequired,
-  onGetAnnotationsError: PropTypes.func,
-  onGetAnnotationsSuccess: PropTypes.func,
-  onRenderAnnotationLayerError: PropTypes.func,
-  onRenderAnnotationLayerSuccess: PropTypes.func,
-  page: isPage,
-  renderInteractiveForms: PropTypes.bool,
-  rotate: isRotate,
-  scale: PropTypes.number,
-};
 
 const AnnotationLayer = (props) => (
   <DocumentContext.Consumer>

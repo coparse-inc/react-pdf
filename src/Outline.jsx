@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import makeCancellable from 'make-cancellable-promise';
 import makeEventProps from 'make-event-props';
 import mergeClassNames from 'merge-class-names';
@@ -13,13 +12,6 @@ import {
   cancelRunningTask,
   errorOnDev,
 } from './shared/utils';
-
-import {
-  eventProps,
-  isClassName,
-  isPdf,
-  isRef,
-} from './shared/propTypes';
 
 export class OutlineInternal extends PureComponent {
   state = {
@@ -159,16 +151,6 @@ export class OutlineInternal extends PureComponent {
     );
   }
 }
-
-OutlineInternal.propTypes = {
-  className: isClassName,
-  inputRef: isRef,
-  onItemClick: PropTypes.func,
-  onLoadError: PropTypes.func,
-  onLoadSuccess: PropTypes.func,
-  pdf: isPdf,
-  ...eventProps,
-};
 
 function Outline(props, ref) {
   return (

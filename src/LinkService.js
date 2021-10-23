@@ -15,7 +15,7 @@
 
 /* eslint-disable class-methods-use-this, no-empty-function */
 
-import {addLinkAttributes, LinkTarget } from 'pdfjs-dist/build/pdf';
+import { addLinkAttributes, LinkTarget } from 'pdfjs-dist';
 
 export default class LinkService {
   constructor() {

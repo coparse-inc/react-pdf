@@ -3,7 +3,8 @@
   "parser": "babel-eslint",
   "rules": {
     "no-underscore-dangle": ["error", { "allow": ["_pdfInfo", "_pageIndex", "_pageInfo"] }],
-    "react/sort-comp": "off"
+    "react/sort-comp": "off",
+    "react/prop-types": "off"
   },
   "overrides": [
     {

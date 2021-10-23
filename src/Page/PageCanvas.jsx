@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 import mergeRefs from 'merge-refs';
 
 import PageContext from '../PageContext';
@@ -10,8 +9,6 @@ import {
   isCancelException,
   makePageCallback,
 } from '../shared/utils';
-
-import { isPage, isRef, isRotate } from '../shared/propTypes';
 
 export class PageCanvasInternal extends PureComponent {
   componentDidMount() {
@@ -138,16 +135,6 @@ export class PageCanvasInternal extends PureComponent {
     );
   }
 }
-
-PageCanvasInternal.propTypes = {
-  canvasRef: isRef,
-  onRenderError: PropTypes.func,
-  onRenderSuccess: PropTypes.func,
-  page: isPage.isRequired,
-  renderInteractiveForms: PropTypes.bool,
-  rotate: isRotate,
-  scale: PropTypes.number.isRequired,
-};
 
 export default function PageCanvas(props) {
   return (
