@@ -11,6 +11,7 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
+import { AnnotationMode } from 'pdfjs-dist';
 import React, { PureComponent } from 'react';
 import mergeRefs from 'merge-refs';
 import PageContext from '../PageContext';
@@ -75,7 +76,7 @@ export var PageCanvasInternal = /*#__PURE__*/function (_PureComponent) {
         },
 
         viewport: renderViewport,
-        renderInteractiveForms: renderInteractiveForms
+        annotationMode: renderInteractiveForms ? AnnotationMode.ENABLE_STORAGE : AnnotationMode.ENABLE
       }; // If another render is in progress, let's cancel it
 
       _this.cancelRenderingTask();

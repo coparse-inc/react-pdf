@@ -1055,6 +1055,7 @@ import _inherits4 from "@babel/runtime/helpers/esm/inherits";
 import _possibleConstructorReturn4 from "@babel/runtime/helpers/esm/possibleConstructorReturn";
 import _getPrototypeOf4 from "@babel/runtime/helpers/esm/getPrototypeOf";
 import _defineProperty4 from "@babel/runtime/helpers/esm/defineProperty";
+import { AnnotationMode } from "pdfjs-dist";
 import React5, { PureComponent as PureComponent4 } from "react";
 import mergeRefs from "merge-refs";
 function _createSuper4(Derived) {
@@ -1126,7 +1127,7 @@ var PageCanvasInternal = /* @__PURE__ */ function(_PureComponent) {
           return canvas.getContext("2d");
         },
         viewport: renderViewport,
-        renderInteractiveForms
+        annotationMode: renderInteractiveForms ? AnnotationMode.ENABLE_STORAGE : AnnotationMode.ENABLE
       };
       _this.cancelRenderingTask();
       _this.renderer = page.render(renderContext);

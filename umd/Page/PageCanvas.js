@@ -26,6 +26,8 @@ var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/ge
 
 var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
+var _pdfjsDist = require("pdfjs-dist");
+
 var _react = _interopRequireWildcard(require("react"));
 
 var _mergeRefs = _interopRequireDefault(require("merge-refs"));
@@ -99,7 +101,7 @@ var PageCanvasInternal = /*#__PURE__*/function (_PureComponent) {
         },
 
         viewport: renderViewport,
-        renderInteractiveForms: renderInteractiveForms
+        annotationMode: renderInteractiveForms ? _pdfjsDist.AnnotationMode.ENABLE_STORAGE : _pdfjsDist.AnnotationMode.ENABLE
       }; // If another render is in progress, let's cancel it
 
       _this.cancelRenderingTask();
