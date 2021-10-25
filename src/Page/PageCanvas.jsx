@@ -1,3 +1,4 @@
+import { AnnotationMode } from 'pdfjs-dist';
 import React, { PureComponent } from 'react';
 import mergeRefs from 'merge-refs';
 
@@ -106,7 +107,9 @@ export class PageCanvasInternal extends PureComponent {
         return canvas.getContext('2d');
       },
       viewport: renderViewport,
-      renderInteractiveForms,
+      annotationMode: renderInteractiveForms
+        ? AnnotationMode.ENABLE_STORAGE
+        : AnnotationMode.ENABLE,
     };
 
     // If another render is in progress, let's cancel it
